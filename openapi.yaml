@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: FizzBuzz API
+  description: A simple API to return FizzBuzz
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /fizzbuzz:
+    get:
+      description: Returns a list of number 
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/modulo1'
+        - $ref: '#/components/parameters/modulo2'
+        - $ref: '#/components/parameters/word1'
+        - $ref: '#/components/parameters/word2'
+      responses:
+        '200':
+          description: Successfully returned a list of number
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/fizzer'
+                example: '{"data":["1","2","first","4","second","first","7","8","first","second"],"message":"success!"}'
+        '400':
+          $ref: '#/components/responses/400Error'
+
+components:
+  schemas:
+    fizzer:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: set the list's limit range
+      schema:
+        type: integer
+      
+    modulo1:
+      name: modulo1
+      in: query
+      description: Specifies the first modulo
+      schema:
+        type: integer
+        
+    modulo2:
+      name: modulo2
+      in: query
+      description: Specifies the second modulo
+      schema:
+        type: integer
+        
+    word1:
+      name: word1
+      in: query
+      description: Specifies the word that will be printed when the first modulo will occur
+      schema:
+        type: string    
+        
+    word2:
+      name: word2
+      in: query
+      description: Specifies the word that will be printed when the second modulo will occur
+      schema:
+        type: string
+
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object 
+            properties:
+              error:
+                type: string
