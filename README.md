@@ -2,7 +2,7 @@
 
 ## Prerequisite
 
-The go verison used is 1.18  
+The go version used is 1.18  
 The linter used is golangci-lint with version 1.51.0
 
 ## Build
